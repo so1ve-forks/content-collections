@@ -10,9 +10,9 @@ import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 
 type Props = {
-  params: {
+  params: Promise<{
     name: string;
-  };
+  }>;
 };
 
 type TldrLinkProps = {
@@ -33,7 +33,8 @@ function TldrLink({ href, children }: TldrLinkProps) {
   );
 }
 
-export default async function Page({ params: { name } }: Props) {
+export default async function Page({ params }: Props) {
+  const { name } = await params;
   const sample = allSamples.find((sample) => sample.name === name);
   if (!sample) {
     return notFound();
@@ -73,7 +74,8 @@ export default async function Page({ params: { name } }: Props) {
   );
 }
 
-export function generateMetadata({ params: { name } }: Props): Metadata {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { name } = await params;
   const sample = allSamples.find((sample) => sample.name === name);
   if (!sample) {
     return notFound();

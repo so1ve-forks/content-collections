@@ -26,7 +26,7 @@ export default async function Image() {
       >
         <div tw="flex items-center text-slate-200">
           {/* @ts-ignore logo as buffer is fine */}
-          <img width="496" height="496" src={logo} alt="" />
+          <img width={496} height={496} src={logo} alt="" />
 
           <div tw="flex flex-col" style={{ width: 704 }}>
             <h1 tw="text-6xl font-bold text-white">Content Collections</h1>
@@ -41,8 +41,8 @@ export default async function Image() {
           </p>
           <img
             tw="rounded-full border-2 border-slate-400/50"
-            width="64"
-            height="64"
+            width={64}
+            height={64}
             src="https://avatars.githubusercontent.com/u/493333"
             alt=""
           />

@@ -12,17 +12,18 @@ for (const sample of allSamples) {
   }
 }
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     tag?: string | string[];
-  };
+  }>;
 }) {
+  const resolvedSearchParams = await searchParams;
   const tags =
-    typeof searchParams.tag === "string"
-      ? [searchParams.tag]
-      : (searchParams.tag ?? []);
+    typeof resolvedSearchParams.tag === "string"
+      ? [resolvedSearchParams.tag]
+      : (resolvedSearchParams.tag ?? []);
 
   const filteredSamples = allSamples.filter((sample) =>
     tags.every((tag) => sample.tags.includes(tag)),
